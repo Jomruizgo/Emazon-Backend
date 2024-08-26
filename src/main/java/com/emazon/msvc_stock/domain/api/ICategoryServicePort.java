@@ -7,4 +7,5 @@ import java.util.List;
 public interface ICategoryServicePort {
     void saveCategory(Category category);
 
+    List<Category> listCategories(String order, int page, int size);
 }

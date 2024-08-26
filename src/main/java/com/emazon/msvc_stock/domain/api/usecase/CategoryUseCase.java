@@ -31,4 +31,16 @@ public class CategoryUseCase implements ICategoryServicePort {
         categoryPersistencePort.saveCategory(category);
     }
 
+    @Override
+    public List<Category> listCategories(String order, int page, int size) {
+        // Si el parámetro 'orden' es nulo o vacío, asignar un valor por defecto (e.g. ascendente)
+        if (order == null || order.isBlank()) {
+            order = "asc";  // Valor por defecto
+        }
+        boolean ascending = order.equalsIgnoreCase("asc");
+
+        // Delegar la consulta al repositorio
+        return categoryPersistencePort.findAllOrderedByName(ascending, page, size);
+    }
+
 }
