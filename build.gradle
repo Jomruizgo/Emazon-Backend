@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.2'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'jacoco'
 }
 
 group = 'com.emazon'
@@ -26,13 +27,43 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mapstruct:mapstruct:1.6.0'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport // Genera el reporte después de ejecutar las pruebas
 }
+
+jacocoTestReport {
+	dependsOn test // Asegúrate de que las pruebas se ejecuten antes de generar el informe
+
+	reports {
+		xml.required = true // Genera informe en formato XML
+		html.required = true // Genera informe en formato HTML
+	}
+
+	// Configuración para excluir la clase de modelo
+	classDirectories.setFrom(files(classDirectories.files.collect {
+		fileTree(dir: it, excludes: ['**/model/**', '**/DomainConstants.class', '**/configuration/**','**/MsvcStockApplication.class'])
+	}))
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.85 // Configura el umbral de cobertura (85% es el mínimo usado en Pragma)
+			}
+		}
+	}
+}
+
+// Asegúrate de que la verificación de cobertura se ejecute después de las pruebas
+check.dependsOn jacocoTestCoverageVerification
