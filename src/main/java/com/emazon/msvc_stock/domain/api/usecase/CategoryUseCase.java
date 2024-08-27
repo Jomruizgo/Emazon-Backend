@@ -33,11 +33,11 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public List<Category> listCategories(String order, int page, int size) {
-        // Si el parámetro 'orden' es nulo o vacío, asignar un valor por defecto (e.g. ascendente)
+        // Si el parámetro 'orden' es nulo o vacío, asignar un valor por defecto (ascendente)
         if (order == null || order.isBlank()) {
-            order = "asc";  // Valor por defecto
+            order = DomainConstants.DEFAULT_CATEGORY_NAME_ORDER;  // Valor por defecto
         }
-        boolean ascending = order.equalsIgnoreCase("asc");
+        boolean ascending = order.equalsIgnoreCase(DomainConstants.DEFAULT_CATEGORY_NAME_ORDER);
 
         // Delegar la consulta al repositorio
         return categoryPersistencePort.findAllOrderedByName(ascending, page, size);

@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -166,5 +167,30 @@ class CategoryUseCaseTest {
 
         verify(categoryPersistencePort, never()).saveCategory(any(Category.class));
         // Se verifica que el método `saveCategory` del mock `categoryPersistencePort` no se llama cuando el nombre ya existe.
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideCategoriesForListing")
+    void testListCategories(String order, boolean expectedAscending, int page, int size) {
+        // Configurar
+        List<Category> expectedCategories = List.of(new Category(1L, "Electronics", "Various electronic items"));
+
+        when(categoryPersistencePort.findAllOrderedByName(expectedAscending, page, size)).thenReturn(expectedCategories);
+
+        // Actuar
+        List<Category> actualCategories = categoryUseCase.listCategories(order, page, size);
+
+        // Verificar
+        assertEquals(expectedCategories, actualCategories);
+        verify(categoryPersistencePort, times(1)).findAllOrderedByName(expectedAscending, page, size);
+    }
+
+    private static Stream<Arguments> provideCategoriesForListing() {
+        return Stream.of(
+                Arguments.of(null, true, 0, 10),  // Orden nulo, debe ser ascendente
+                Arguments.of("", true, 0, 10),   // Orden vacío, debe ser ascendente
+                Arguments.of("asc", true, 0, 10),  // Orden ascendente explícito
+                Arguments.of("desc", false, 0, 10) // Orden descendente
+        );
     }
 }
