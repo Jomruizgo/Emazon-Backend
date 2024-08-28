@@ -5,6 +5,8 @@ import com.emazon.msvc_stock.domain.model.Brand;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface IBrandEntityMapper {
     @Mapping(source = "id", target = "id")
@@ -17,5 +19,5 @@ public interface IBrandEntityMapper {
     @Mapping(source = "description", target = "description")
     BrandEntity toEntity(Brand brand);
 
-
+    List<Brand> toModelList(List<BrandEntity> brandEntities);
 }

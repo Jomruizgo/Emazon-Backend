@@ -39,6 +39,7 @@ public class BeanConfiguration {
         return new BrandAdapter(brandRepository, brandEntityMapper);
     }
 
+
     @Bean
     public ICategoryRequestMapper categoryRequestMapper() {
         return new CategoryRequestMapperImpl();
@@ -50,6 +51,11 @@ public class BeanConfiguration {
         return new CategoryUseCase(categoryPersistencePort());
     }
 
+
+    @Bean
+    public IBrandResponseMapper brandResponseMapper() {
+        return new BrandResponseMapperImpl();
+    }
     @Bean
     public IBrandRequestMapper brandRequestMapper() {
         return new BrandRequestMapperImpl();
