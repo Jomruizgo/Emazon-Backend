@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class ControllerAdvisor {
     @ExceptionHandler(DuplicateNameException.class)
     public ResponseEntity<ExceptionResponse> handleDuplicateCategoryNameException(DuplicateNameException exception){
-        return ResponseEntity.badRequest().body(new ExceptionResponse(
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ExceptionResponse(
                 String.format(exception.getMessage()),
                 HttpStatus.CONFLICT.toString(), LocalDateTime.now()
         ));
