@@ -1,6 +1,6 @@
 package com.emazon.msvc_stock.domain.api.usecase;
 
-import com.emazon.msvc_stock.domain.exception.DuplicateCategoryNameException;
+import com.emazon.msvc_stock.domain.exception.DuplicateNameException;
 import com.emazon.msvc_stock.domain.model.Category;
 import com.emazon.msvc_stock.domain.spi.ICategoryPersistencePort;
 import com.emazon.msvc_stock.domain.util.DomainConstants;
@@ -73,7 +73,7 @@ class CategoryUseCaseTest {
         });
         // Se verifica que se lanza IllegalArgumentException cuando el nombre es demasiado largo.
 
-        assertEquals(DomainConstants.FIELD_NAME_TOO_LARGE_MESSAGE, exception.getMessage());
+        assertEquals(DomainConstants.FIELD_NAME_TOO_LARGE_MESSAGE + DomainConstants.MAX_CATEGORY_NAME_LENGTH, exception.getMessage());
         // Se comprueba que el mensaje de la excepción es el correcto.
     }
 
@@ -92,7 +92,7 @@ class CategoryUseCaseTest {
         });
         // Se verifica que se lanza IllegalArgumentException cuando la descripción es demasiado larga.
 
-        assertEquals(DomainConstants.FIELD_DESCRIPTION_TOO_LARGE_MESSAGE, exception.getMessage());
+        assertEquals(DomainConstants.FIELD_DESCRIPTION_TOO_LARGE_MESSAGE + DomainConstants.MAX_CATEGORY_DESCRIPTION_LENGTH, exception.getMessage());
         // Se comprueba que el mensaje de la excepción es el esperado.
     }
 
@@ -157,10 +157,10 @@ class CategoryUseCaseTest {
         when(categoryPersistencePort.categoryNameExists(category.getName())).thenReturn(true);
         // Se simula que el nombre de la categoría ya existe en la base de datos.
 
-        DuplicateCategoryNameException exception = assertThrows(DuplicateCategoryNameException.class, () -> {
+        DuplicateNameException exception = assertThrows(DuplicateNameException.class, () -> {
             categoryUseCase.saveCategory(category);
         });
-        // Se verifica que se lanza una excepción `DuplicateCategoryNameException` cuando el nombre de la categoría ya existe.
+        // Se verifica que se lanza una excepción `DuplicateNameException` cuando el nombre de la categoría ya existe.
 
         assertEquals("Category name already exists", exception.getMessage());
         // Se comprueba que el mensaje de la excepción es el correcto.
