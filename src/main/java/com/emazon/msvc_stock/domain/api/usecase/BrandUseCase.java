@@ -6,6 +6,8 @@ import com.emazon.msvc_stock.domain.model.Brand;
 import com.emazon.msvc_stock.domain.spi.IBrandPersistencePort;
 import com.emazon.msvc_stock.domain.util.DomainConstants;
 
+import java.util.List;
+
 public class BrandUseCase implements IBrandServicePort {
     private final IBrandPersistencePort brandPersistencePort;
 
@@ -27,5 +29,15 @@ public class BrandUseCase implements IBrandServicePort {
             throw new DuplicateNameException(DomainConstants.DUPLICATED_BRAND_NAME_MESSAGE);
         }
         brandPersistencePort.saveBrand(brand);
+    }
+
+    @Override
+    public List<Brand> listBrands(String order, int page, int size) {
+        if (order == null || order.isBlank()) {
+            order = DomainConstants.DEFAULT_BRAND_NAME_ORDER;
+        }
+        boolean ascending = order.equalsIgnoreCase(DomainConstants.DEFAULT_BRAND_NAME_ORDER);
+
+        return brandPersistencePort.findAllOrderedByName(ascending, page, size);
     }
 }

@@ -12,6 +12,7 @@ public final class DomainConstants {
 
     public static final int MAX_BRAND_NAME_LENGTH=50;
     public static final int MAX_BRAND_DESCRIPTION_LENGTH=120;
+    public static final String DEFAULT_BRAND_NAME_ORDER="asc";
 
 
     public static final String FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE = "Name and description must not be empty";
