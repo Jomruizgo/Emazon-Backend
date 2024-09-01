@@ -1,7 +1,7 @@
 package com.emazon.msvc_stock.adapters.driving.http.controller;
 
 import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequest;
-import com.emazon.msvc_stock.adapters.driving.http.mapper.ICategoryRequestMapper;
+import com.emazon.msvc_stock.adapters.driving.http.mapper.request.ICategoryRequestMapper;
 import com.emazon.msvc_stock.configuration.exceptionhandler.ControllerAdvisor;
 import com.emazon.msvc_stock.domain.api.ICategoryServicePort;
 import com.emazon.msvc_stock.domain.model.Category;

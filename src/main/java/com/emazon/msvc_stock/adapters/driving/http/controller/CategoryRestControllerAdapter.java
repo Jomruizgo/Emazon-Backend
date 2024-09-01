@@ -2,8 +2,8 @@ package com.emazon.msvc_stock.adapters.driving.http.controller;
 
 import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequest;
 import com.emazon.msvc_stock.adapters.driving.http.dto.response.CategoryResponse;
-import com.emazon.msvc_stock.adapters.driving.http.mapper.ICategoryRequestMapper;
-import com.emazon.msvc_stock.adapters.driving.http.mapper.ICategoryResponseMapper;
+import com.emazon.msvc_stock.adapters.driving.http.mapper.request.ICategoryRequestMapper;
+import com.emazon.msvc_stock.adapters.driving.http.mapper.response.ICategoryResponseMapper;
 import com.emazon.msvc_stock.domain.api.ICategoryServicePort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -15,11 +15,15 @@ public final class DomainConstants {
     public static final String DEFAULT_BRAND_NAME_ORDER="asc";
 
 
+    public static final int MAX_CATEGORY_ASSOCIATED_TO_ARTICLE = 3;
+
+
     public static final String FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE = "Name and description must not be empty";
     public static final String FIELD_NAME_TOO_LARGE_MESSAGE = "Field 'name' cannot be longer than ";
     public static final String FIELD_DESCRIPTION_TOO_LARGE_MESSAGE = "Field 'name' cannot be longer than ";
     public static final String DUPLICATED_CATEGORY_NAME_MESSAGE = "Category name already exists";
 
     public static final String DUPLICATED_BRAND_NAME_MESSAGE = "Brand name already exists";
+    public static final String LIMIT_CATEGORIES_TO_ARTICLE_MESSAGE = "An article should has minimum 1 category and maximum "+ MAX_CATEGORY_ASSOCIATED_TO_ARTICLE +" categories associated.";
 
 }

@@ -2,8 +2,8 @@ package com.emazon.msvc_stock.adapters.driving.http.controller;
 
 import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddBrandRequest;
 import com.emazon.msvc_stock.adapters.driving.http.dto.response.BrandResponse;
-import com.emazon.msvc_stock.adapters.driving.http.mapper.IBrandRequestMapper;
-import com.emazon.msvc_stock.adapters.driving.http.mapper.IBrandResponseMapper;
+import com.emazon.msvc_stock.adapters.driving.http.mapper.request.IBrandRequestMapper;
+import com.emazon.msvc_stock.adapters.driving.http.mapper.response.IBrandResponseMapper;
 import com.emazon.msvc_stock.domain.api.IBrandServicePort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

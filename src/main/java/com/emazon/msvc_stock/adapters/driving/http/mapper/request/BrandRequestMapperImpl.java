@@ -1,9 +1,10 @@
-package com.emazon.msvc_stock.adapters.driving.http.mapper;
+package com.emazon.msvc_stock.adapters.driving.http.mapper.request;
 
 import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddBrandRequest;
+import com.emazon.msvc_stock.adapters.driving.http.mapper.request.IBrandRequestMapper;
 import com.emazon.msvc_stock.domain.model.Brand;
 
-public class BrandRequestMapperImpl implements IBrandRequestMapper{
+public class BrandRequestMapperImpl implements IBrandRequestMapper {
     @Override
     public Brand addRequestToBrand(AddBrandRequest addBrandRequest) {
         if (addBrandRequest == null) {

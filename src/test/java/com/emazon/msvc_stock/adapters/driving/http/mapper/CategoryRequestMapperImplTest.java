@@ -1,6 +1,7 @@
 package com.emazon.msvc_stock.adapters.driving.http.mapper;
 
 import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequest;
+import com.emazon.msvc_stock.adapters.driving.http.mapper.request.CategoryRequestMapperImpl;
 import com.emazon.msvc_stock.domain.model.Category;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,6 +1,5 @@
 package com.emazon.msvc_stock.adapters.driven.jpa.mysql.entity;
 
-import com.emazon.msvc_stock.domain.util.DomainConstants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,26 +11,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "products")
+@Table(name = "articles")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductEntity {
+public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
+    @Column(name = "article_id")
     private Long id;
 
-    @Column(name= "product_name", nullable = false)
+    @Column(name= "article_name", nullable = false)
     private String name;
-    @Column(name= "product_description", nullable = false)
+    @Column(name= "article_description", nullable = false)
     private String description;
     @Column(name= "quantity", nullable = false)
     private Integer quantity;
     @Column(name= "price", nullable = false)
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private Set<ProductCategoryEntity> productCategories = new HashSet<>();
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private Set<ArticleCategoryEntity> articleCategories = new HashSet<>();
+    //Using Set in order to avoid duplicates categories associated with an article
 }

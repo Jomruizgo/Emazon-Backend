@@ -1,17 +1,25 @@
 package com.emazon.msvc_stock.adapters.driven.jpa.mysql.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "products_categories")
-public class ProductCategoryEntity {
+@Table(name = "articles_categories")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ArticleCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private ProductEntity product;
+    @JoinColumn(name = "article_id")
+    private ArticleEntity article;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

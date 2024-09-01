@@ -8,5 +8,7 @@ public interface ICategoryPersistencePort {
     void saveCategory(Category category);
     boolean categoryNameExists(String name);
 
+    Category findCategoryByName(String name);
+
     List<Category> findAllOrderedByName(boolean ascending, int page, int size);
 }

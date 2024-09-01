@@ -32,6 +32,11 @@ public class CategoryAdapter implements ICategoryPersistencePort {
     }
 
     @Override
+    public Category findCategoryByName(String name) {
+        return categoryEntityMapper.toModel(categoryRepository.findByName(name));
+    }
+
+    @Override
     public List<Category> findAllOrderedByName(boolean ascending, int page, int size) {
         // Crear un objeto Pageable basado en los parámetros proporcionados
         Sort sort = Sort.by(ascending ? Sort.Direction.ASC : Sort.Direction.DESC, "name");

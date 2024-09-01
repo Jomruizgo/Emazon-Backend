@@ -1,4 +1,4 @@
-package com.emazon.msvc_stock.adapters.driving.http.mapper;
+package com.emazon.msvc_stock.adapters.driving.http.mapper.response;
 
 import com.emazon.msvc_stock.adapters.driving.http.dto.response.BrandResponse;
 import com.emazon.msvc_stock.domain.model.Brand;
