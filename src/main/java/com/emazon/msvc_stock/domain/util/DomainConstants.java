@@ -26,4 +26,6 @@ public final class DomainConstants {
     public static final String DUPLICATED_BRAND_NAME_MESSAGE = "Brand name already exists";
     public static final String LIMIT_CATEGORIES_TO_ARTICLE_MESSAGE = "An article should has minimum 1 category and maximum "+ MAX_CATEGORY_ASSOCIATED_TO_ARTICLE +" categories associated.";
 
+    public static final String CATEGORY_NAME_DOES_NOT_EXIST_MESSAGE = "Category with follow name does not exist: ";
+    public static final String CATEGORY_NAME_MANDATORY_MESSAGE="Category must have a name";
 }

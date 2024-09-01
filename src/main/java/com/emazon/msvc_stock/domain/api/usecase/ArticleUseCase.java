@@ -35,12 +35,12 @@ public class ArticleUseCase implements IArticleServicePort {
         Set<Category> validCategories = new HashSet<>();
         for (Category category : categories) {
             if (category.getName() == null) {
-                throw new IllegalArgumentException("Category must have a name");
+                throw new IllegalArgumentException(DomainConstants.CATEGORY_NAME_MANDATORY_MESSAGE);
             }
 
             Category existingCategory = categoryPersistencePort.findCategoryByName(category.getName());
             if (existingCategory == null) {
-                throw new IllegalArgumentException("Category with name '" + category.getName() + "' does not exist");
+                throw new IllegalArgumentException(DomainConstants.CATEGORY_NAME_DOES_NOT_EXIST_MESSAGE + category.getName() );
             }
 
             validCategories.add(existingCategory);

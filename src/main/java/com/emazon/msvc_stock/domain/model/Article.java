@@ -14,12 +14,13 @@ public class Article {
 
     public Article() {}
 
-    public Article(Long id, String name, String description, int quantity, BigDecimal price) {
+    public Article(Long id, String name, String description, int quantity, BigDecimal price,Set<Category> categories) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
         this.price = price;
+        this.categories = categories;
     }
 
     // Getters and Setters
