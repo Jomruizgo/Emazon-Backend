@@ -10,7 +10,7 @@ public class Article {
     private String description;
     private int quantity;
     private BigDecimal price;
-    private Set<Category> categories= new HashSet<Category>();
+    private Set<Category> categories= new HashSet<>();
 
     public Article() {}
 
