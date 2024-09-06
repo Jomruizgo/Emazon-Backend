@@ -1,9 +1,10 @@
 package com.emazon.msvc_stock.adapters.driving.http.dto.request;
 
 
+import com.emazon.msvc_stock.domain.model.Brand;
+import com.emazon.msvc_stock.domain.model.Category;
 import com.emazon.msvc_stock.domain.util.DomainConstants;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @Getter
-public class AddArticleRequest {
+public class AddArticleRequestDto {
     @NotBlank(message = DomainConstants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE)
     private String name;
 
@@ -30,6 +31,8 @@ public class AddArticleRequest {
     private BigDecimal price;
 
     @NotNull(message = "At least one category name is required")
-    @NotEmpty(message = "At least one category name is required")
-    private List<String> categories;
+    private List<Category> categories;
+
+    @NotNull(message = "Brand is mandatory")
+    private Brand brand;
 }

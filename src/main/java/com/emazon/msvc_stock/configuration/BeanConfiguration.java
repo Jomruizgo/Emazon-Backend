@@ -33,24 +33,25 @@ public class BeanConfiguration {
     private final ICategoryEntityMapper categoryEntityMapper;
     private final IBrandEntityMapper brandEntityMapper;
     private final IArticleEntityMapper articleEntityMapper;
+    private final ICategoryWithinArticleMapper categoryWithinArticleMapper;
 
 
 
-    public BeanConfiguration(ICategoryRepository categoryRepository, ICategoryEntityMapper categoryEntityMapper, IBrandRepository brandRepository, IArticleRepository articleRepository, IBrandEntityMapper brandEntityMapper, IArticleEntityMapper articleEntityMapper) {
+    public BeanConfiguration(ICategoryRepository categoryRepository, ICategoryEntityMapper categoryEntityMapper, IBrandRepository brandRepository, IArticleRepository articleRepository, IBrandEntityMapper brandEntityMapper, IArticleEntityMapper articleEntityMapper, ICategoryWithinArticleMapper categoryWithinArticleMapper) {
         this.categoryRepository = categoryRepository;
         this.categoryEntityMapper = categoryEntityMapper;
         this.brandRepository = brandRepository;
         this.articleRepository = articleRepository;
         this.brandEntityMapper = brandEntityMapper;
         this.articleEntityMapper = articleEntityMapper;
+        this.categoryWithinArticleMapper = categoryWithinArticleMapper;
     }
 
     //Pesistence Ports
     @Bean
     public ICategoryPersistencePort categoryPersistencePort(){ return new CategoryAdapter(categoryRepository, categoryEntityMapper); }
     @Bean
-    public IBrandPersistencePort brandPersistencePort(){
-        return new BrandAdapter(brandRepository, brandEntityMapper);
+    public IBrandPersistencePort brandPersistencePort(){ return new BrandAdapter(brandRepository, brandEntityMapper);
     }
     @Bean
     public IArticlePersistencePort articlePersistencePort(){ return new ArticleAdapter(articleRepository, articleEntityMapper);}
@@ -73,12 +74,16 @@ public class BeanConfiguration {
     }
     @Bean
     public IArticleRequestMapper articleRequestMapper(){return new ArticleRequestMapperImpl();}
+    @Bean
+    public IArticleResponseMapper articleResponseMapper(){return new ArticleResponseMapperImpl(categoryWithinArticleMapper);}
+
+
 
 
     //Driven Manual Mappers
     @Bean
     public IArticleEntityMapper articleEntityMapper(ICategoryEntityMapper categoryEntityMapper) {
-        return new ArticleEntityMapperImpl(categoryEntityMapper);
+        return new ArticleEntityMapperImpl(categoryEntityMapper, brandEntityMapper);
     }
 
     //Service Ports
@@ -91,7 +96,7 @@ public class BeanConfiguration {
         return new BrandUseCase(brandPersistencePort());
     }
     @Bean
-    public IArticleServicePort articleServicePort(){ return new ArticleUseCase(articlePersistencePort(), categoryPersistencePort()); }
+    public IArticleServicePort articleServicePort(){ return new ArticleUseCase(articlePersistencePort(), categoryPersistencePort(), brandPersistencePort()); }
 
 
 

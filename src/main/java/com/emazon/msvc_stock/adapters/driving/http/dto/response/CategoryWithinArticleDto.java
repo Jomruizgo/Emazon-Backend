@@ -2,11 +2,12 @@ package com.emazon.msvc_stock.adapters.driving.http.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
-public class BrandResponse {
+@Setter
+public class CategoryWithinArticleDto {
     private final Long id;
     private final String name;
-    private final String description;
 }

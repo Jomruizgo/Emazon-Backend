@@ -19,7 +19,6 @@ import java.util.Set;
 public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "article_id")
     private Long id;
 
     @Column(name= "article_name", nullable = false)
@@ -34,4 +33,9 @@ public class ArticleEntity {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private Set<ArticleCategoryEntity> articleCategories = new HashSet<>();
     //Using Set in order to avoid duplicates categories associated with an article
+
+    @ManyToOne
+    @JoinColumn( nullable = false, name = "brand_id")
+    private BrandEntity brand;
+
 }

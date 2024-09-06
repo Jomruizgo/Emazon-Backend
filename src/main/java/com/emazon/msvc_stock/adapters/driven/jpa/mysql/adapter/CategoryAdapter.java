@@ -21,9 +21,7 @@ public class CategoryAdapter implements ICategoryPersistencePort {
 
     @Override
     public void saveCategory(Category category) {
-        //En el dominio se maneja la duplicidad del nombre de la categoria
         categoryRepository.save(categoryEntityMapper.toEntity(category));
-
     }
 
     @Override
@@ -37,12 +35,20 @@ public class CategoryAdapter implements ICategoryPersistencePort {
     }
 
     @Override
+    public Category findCategoryById(Long id) {
+
+        return categoryEntityMapper.toModel(categoryRepository.findById(id).orElse(null));
+
+    }
+
+    @Override
     public List<Category> findAllOrderedByName(boolean ascending, int page, int size) {
-        // Crear un objeto Pageable basado en los parámetros proporcionados
+
         Sort sort = Sort.by(ascending ? Sort.Direction.ASC : Sort.Direction.DESC, "name");
+
         PageRequest pageRequest = PageRequest.of(page, size, sort);
 
-        // Consultar el repositorio de JPA
+
         return categoryEntityMapper.toModelList(categoryRepository.findAll(pageRequest).getContent());
 
     }

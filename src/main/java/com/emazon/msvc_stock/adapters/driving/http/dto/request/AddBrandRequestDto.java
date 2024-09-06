@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class AddCategoryRequest {
+public class AddBrandRequestDto {
     private final String name;
     private final String description;
 }

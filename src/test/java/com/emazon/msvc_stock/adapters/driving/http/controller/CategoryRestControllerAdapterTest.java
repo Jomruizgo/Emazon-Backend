@@ -1,6 +1,6 @@
 package com.emazon.msvc_stock.adapters.driving.http.controller;
 
-import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequest;
+import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequestDto;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.request.ICategoryRequestMapper;
 import com.emazon.msvc_stock.configuration.exceptionhandler.ControllerAdvisor;
 import com.emazon.msvc_stock.domain.api.ICategoryServicePort;
@@ -63,13 +63,13 @@ class CategoryRestControllerAdapterTest {
     @Test
     void testAddCategory() throws Exception {
         // Arrange
-        AddCategoryRequest addCategoryRequest = new AddCategoryRequest("Electronics", "Various electronic items");
+        AddCategoryRequestDto addCategoryRequest = new AddCategoryRequestDto("Electronics", "Various electronic items");
         // Crea una instancia de AddCategoryRequest que se usará como el contenido de la solicitud en la prueba.
 
         Category category = new Category(null, "Electronics", "Various electronic items");
         // Crea una instancia de Category que representa el objeto que se espera que el mapeador devuelva.
 
-        when(categoryRequestMapper.addRequestToCategory(any(AddCategoryRequest.class))).thenReturn(category);
+        when(categoryRequestMapper.addRequestToCategory(any(AddCategoryRequestDto.class))).thenReturn(category);
         // Configura el mock de categoryRequestMapper para que devuelva el objeto `category` cuando se le pase cualquier
         // instancia de AddCategoryRequest.
 

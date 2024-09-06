@@ -28,6 +28,11 @@ public class BrandAdapter implements IBrandPersistencePort {
     }
 
     @Override
+    public Brand findBrandById(Long id) {
+        return brandEntityMapper.toModel(brandRepository.findById(id).orElse(null));
+    }
+
+    @Override
     public List<Brand> findAllOrderedByName(boolean ascending, int page, int size) {
         Sort sort = Sort.by(ascending ? Sort.Direction.ASC : Sort.Direction.DESC, "name");
         PageRequest pageRequest = PageRequest.of(page, size, sort);

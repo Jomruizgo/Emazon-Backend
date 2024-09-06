@@ -1,7 +1,7 @@
 package com.emazon.msvc_stock.adapters.driving.http.controller;
 
-import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddBrandRequest;
-import com.emazon.msvc_stock.adapters.driving.http.dto.response.BrandResponse;
+import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddBrandRequestDto;
+import com.emazon.msvc_stock.adapters.driving.http.dto.response.BrandResponseDto;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.request.IBrandRequestMapper;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.response.IBrandResponseMapper;
 import com.emazon.msvc_stock.domain.api.IBrandServicePort;
@@ -26,13 +26,15 @@ public class BrandRestControllerAdapter {
         this.brandResponseMapper = brandResponseMapper;
     }
     @PostMapping("/")
-    public ResponseEntity<Void> addCategory(@RequestBody AddBrandRequest request){
+    public ResponseEntity<Void> addCategory(@RequestBody AddBrandRequestDto request){
         brandServicePort.saveBrand(brandRequestMapper.addRequestToBrand(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<BrandResponse>> getAllBrands(@RequestParam Integer page, @RequestParam Integer size, @RequestParam(required = false) String order) {
+    public ResponseEntity<List<BrandResponseDto>> getAllBrands(@RequestParam Integer page,
+                                                               @RequestParam Integer size,
+                                                               @RequestParam(required = false) String order) {
         return ResponseEntity.ok(brandResponseMapper.toBrandResponseList(
                 brandServicePort.listBrands(order, page, size)));
     }

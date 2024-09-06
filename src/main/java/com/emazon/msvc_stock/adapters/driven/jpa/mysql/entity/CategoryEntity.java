@@ -19,8 +19,8 @@ public class CategoryEntity {
     @Column(name = "category_id")
     private Long id;
 
-    @Column(name= "category_name",unique = true, nullable = false, length = DomainConstants.MAX_CATEGORY_NAME_LENGTH)
+    @Column(unique = true, nullable = false, length = DomainConstants.MAX_CATEGORY_NAME_LENGTH, name= "category_name")
     private String name;
-    @Column(name= "category_description", nullable = false, length = DomainConstants.MAX_CATEGORY_DESCRIPTION_LENGTH)
+    @Column( nullable = false, length = DomainConstants.MAX_CATEGORY_DESCRIPTION_LENGTH, name= "category_description")
     private String description;
 }

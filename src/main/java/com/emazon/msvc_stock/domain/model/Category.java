@@ -1,5 +1,7 @@
 package com.emazon.msvc_stock.domain.model;
 
+import java.util.Objects;
+
 public class Category {
     private Long id;
     private String name;
@@ -11,6 +13,20 @@ public class Category {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    // equals() and hashCode() based on id and name. These methods are important to compare categories in a HashSet
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id) || Objects.equals(name, category.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
     // Getters and Setters

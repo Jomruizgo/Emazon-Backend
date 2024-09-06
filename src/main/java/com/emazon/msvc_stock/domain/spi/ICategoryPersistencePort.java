@@ -9,6 +9,7 @@ public interface ICategoryPersistencePort {
     boolean categoryNameExists(String name);
 
     Category findCategoryByName(String name);
+    Category findCategoryById(Long id);
 
     List<Category> findAllOrderedByName(boolean ascending, int page, int size);
 }

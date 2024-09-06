@@ -1,7 +1,7 @@
 package com.emazon.msvc_stock.adapters.driving.http.controller;
 
-import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequest;
-import com.emazon.msvc_stock.adapters.driving.http.dto.response.CategoryResponse;
+import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequestDto;
+import com.emazon.msvc_stock.adapters.driving.http.dto.response.CategoryResponseDto;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.request.ICategoryRequestMapper;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.response.ICategoryResponseMapper;
 import com.emazon.msvc_stock.domain.api.ICategoryServicePort;
@@ -26,13 +26,13 @@ public class CategoryRestControllerAdapter {
         this.categoryResponseMapper = categoryResponseMapper;
     }
     @PostMapping("/")
-    public ResponseEntity<Void> addCategory(@RequestBody AddCategoryRequest request){
+    public ResponseEntity<Void> addCategory(@RequestBody AddCategoryRequestDto request){
         categoryServicePort.saveCategory(categoryRequestMapper.addRequestToCategory(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<CategoryResponse>> getAllCategories(@RequestParam Integer page, @RequestParam Integer size, @RequestParam(required = false) String order) {
+    public ResponseEntity<List<CategoryResponseDto>> getAllCategories(@RequestParam Integer page, @RequestParam Integer size, @RequestParam(required = false) String order) {
         return ResponseEntity.ok(categoryResponseMapper.toCategoryResponseList(
                 categoryServicePort.listCategories(order, page, size)));
     }

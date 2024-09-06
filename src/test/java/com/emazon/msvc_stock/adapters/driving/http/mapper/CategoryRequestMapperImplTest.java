@@ -1,6 +1,6 @@
 package com.emazon.msvc_stock.adapters.driving.http.mapper;
 
-import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequest;
+import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddCategoryRequestDto;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.request.CategoryRequestMapperImpl;
 import com.emazon.msvc_stock.domain.model.Category;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ class CategoryRequestMapperImplTest {
     @Test
     void testAddRequestToCategory_withValidRequest() {
         // Preparar datos de prueba
-        AddCategoryRequest addCategoryRequest = new AddCategoryRequest("Test Category","Test Description");
+        AddCategoryRequestDto addCategoryRequest = new AddCategoryRequestDto("Test Category","Test Description");
 
 
         // Ejecutar la conversión

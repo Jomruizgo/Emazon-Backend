@@ -5,13 +5,16 @@ import com.emazon.msvc_stock.adapters.driven.jpa.mysql.entity.ArticleEntity;
 import com.emazon.msvc_stock.domain.model.Article;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class ArticleEntityMapperImpl implements IArticleEntityMapper{
     private final ICategoryEntityMapper categoryEntityMapper;
+    private final IBrandEntityMapper brandEntityMapper;
 
-    public ArticleEntityMapperImpl(ICategoryEntityMapper categoryEntityMapper) {
+    public ArticleEntityMapperImpl(ICategoryEntityMapper categoryEntityMapper, IBrandEntityMapper brandEntityMapper) {
         this.categoryEntityMapper = categoryEntityMapper;
+        this.brandEntityMapper = brandEntityMapper;
     }
 
     @Override
@@ -23,7 +26,8 @@ public class ArticleEntityMapperImpl implements IArticleEntityMapper{
         article.setQuantity(articleEntity.getQuantity());
         article.setPrice(articleEntity.getPrice());
 
-        // Map ArticleCategoryEntity to categories
+        article.setBrand(brandEntityMapper.toModel(articleEntity.getBrand()));
+
         article.setCategories(
                 articleEntity.getArticleCategories().stream()
                         .map(articleCategory -> categoryEntityMapper.toModel(articleCategory.getCategory()))
@@ -42,7 +46,8 @@ public class ArticleEntityMapperImpl implements IArticleEntityMapper{
         articleEntity.setQuantity(article.getQuantity());
         articleEntity.setPrice(article.getPrice());
 
-        // Map categories to ArticleCategoryEntity
+        articleEntity.setBrand(brandEntityMapper.toEntity(article.getBrand()));
+
         articleEntity.setArticleCategories(
                 article.getCategories().stream()
                         .map(category -> new ArticleCategoryEntity(null, articleEntity, categoryEntityMapper.toEntity(category)))
@@ -51,4 +56,11 @@ public class ArticleEntityMapperImpl implements IArticleEntityMapper{
 
         return articleEntity;
     }
+
+    @Override
+    public List<Article> toModelList(List<ArticleEntity> articlesEntity) {
+        return articlesEntity.stream()
+                .map(this::toModel).toList();
+    }
+
 }
