@@ -30,7 +30,7 @@ public class ArticleAdapter implements IArticlePersistencePort {
 
         Sort sort;
 
-        if (DomainConstants.SORT_ARTICLE_FIELDS.get("category").equals(sortBy)) {
+        if (DomainConstants.ARTICLE_SORT_BY_CATEGORY_NAME.equals(sortBy)) {
             sort = JpaSort.unsafe(ascending ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy);
         } else {
             sort = Sort.by(ascending ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy);
