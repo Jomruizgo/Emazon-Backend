@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/brand")
+@RequestMapping("api/brand")
 public class BrandRestControllerAdapter {
     private final IBrandServicePort brandServicePort;
     private final IBrandRequestMapper brandRequestMapper;
@@ -25,13 +25,13 @@ public class BrandRestControllerAdapter {
         this.brandRequestMapper = brandRequestMapper;
         this.brandResponseMapper = brandResponseMapper;
     }
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<Void> addCategory(@RequestBody AddBrandRequestDto request){
         brandServicePort.saveBrand(brandRequestMapper.addRequestToBrand(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<BrandResponseDto>> getAllBrands(@RequestParam Integer page,
                                                                @RequestParam Integer size,
                                                                @RequestParam(required = false) String order) {

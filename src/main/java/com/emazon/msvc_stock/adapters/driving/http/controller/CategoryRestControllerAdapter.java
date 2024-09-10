@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("api/category")
 public class CategoryRestControllerAdapter {
     private final ICategoryServicePort categoryServicePort;
     private final ICategoryRequestMapper categoryRequestMapper;
@@ -25,13 +25,13 @@ public class CategoryRestControllerAdapter {
         this.categoryRequestMapper = categoryRequestMapper;
         this.categoryResponseMapper = categoryResponseMapper;
     }
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<Void> addCategory(@RequestBody AddCategoryRequestDto request){
         categoryServicePort.saveCategory(categoryRequestMapper.addRequestToCategory(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<CategoryResponseDto>> getAllCategories(@RequestParam Integer page, @RequestParam Integer size, @RequestParam(required = false) String order) {
         return ResponseEntity.ok(categoryResponseMapper.toCategoryResponseList(
                 categoryServicePort.listCategories(order, page, size)));

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping("api/article")
 public class ArticleRestControllerAdapter {
     private final IArticleServicePort articleServicePort;
     private final IArticleRequestMapper articleRequestMapper;
@@ -24,13 +24,13 @@ public class ArticleRestControllerAdapter {
         this.articleRequestMapper = articleRequestMapper;
         this.articleResponseMapper = articleResponseMapper;
     }
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<Void> addArticle(@Valid @RequestBody AddArticleRequestDto request){
         articleServicePort.saveArticle(articleRequestMapper.addRecuestToArticle(request));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<ArticleResponseDto>> getAllArticles(@RequestParam Integer page,
                                                                    @RequestParam Integer size,
                                                                    @RequestParam(required = false) String sortBy ,
