@@ -1,7 +1,7 @@
 package com.emazon.msvc_stock.domain.api.usecase;
 
 import com.emazon.msvc_stock.domain.api.ICategoryServicePort;
-import com.emazon.msvc_stock.domain.exception.DuplicateNameException;
+import com.emazon.msvc_stock.domain.exceptions.DuplicateNameException;
 import com.emazon.msvc_stock.domain.model.Category;
 import com.emazon.msvc_stock.domain.spi.ICategoryPersistencePort;
 import com.emazon.msvc_stock.domain.util.Constants;

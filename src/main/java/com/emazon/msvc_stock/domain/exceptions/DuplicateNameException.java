@@ -1,4 +1,4 @@
-package com.emazon.msvc_stock.domain.exception;
+package com.emazon.msvc_stock.domain.exceptions;
 
 public class DuplicateNameException extends RuntimeException {
     public DuplicateNameException(String message){

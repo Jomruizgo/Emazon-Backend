@@ -13,6 +13,8 @@ public final class Constants {
     public static final String API_BRAND_PATH = "api/brand";
 
 
+    public static final String ADMIN_ROLE = "ADMINISTRATOR";
+
     public static final int MAX_CATEGORY_NAME_LENGTH=50;
     public static final int MAX_CATEGORY_DESCRIPTION_LENGTH=90;
     public static final String DEFAULT_CATEGORY_NAME_ORDER="asc";

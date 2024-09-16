@@ -10,6 +10,7 @@ import com.emazon.msvc_stock.adapters.driven.jpa.mysql.mapper.ICategoryEntityMap
 import com.emazon.msvc_stock.adapters.driven.jpa.mysql.repository.IArticleRepository;
 import com.emazon.msvc_stock.adapters.driven.jpa.mysql.repository.IBrandRepository;
 import com.emazon.msvc_stock.adapters.driven.jpa.mysql.repository.ICategoryRepository;
+import com.emazon.msvc_stock.adapters.driven.jwt.JavaJwtAdapter;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.request.*;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.response.*;
 import com.emazon.msvc_stock.domain.api.IArticleServicePort;
@@ -21,6 +22,7 @@ import com.emazon.msvc_stock.domain.api.usecase.CategoryUseCase;
 import com.emazon.msvc_stock.domain.spi.IArticlePersistencePort;
 import com.emazon.msvc_stock.domain.spi.IBrandPersistencePort;
 import com.emazon.msvc_stock.domain.spi.ICategoryPersistencePort;
+import com.emazon.msvc_stock.domain.spi.ITokenServicePort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -99,5 +101,10 @@ public class BeanConfiguration {
     public IArticleServicePort articleServicePort(){ return new ArticleUseCase(articlePersistencePort(), categoryPersistencePort(), brandPersistencePort()); }
 
 
+
+    @Bean
+    public ITokenServicePort tokenPort() {
+        return new JavaJwtAdapter();
+    }
 
 }

@@ -1,7 +1,7 @@
 package com.emazon.msvc_stock.domain.api.usecase;
 
 import com.emazon.msvc_stock.domain.api.IBrandServicePort;
-import com.emazon.msvc_stock.domain.exception.DuplicateNameException;
+import com.emazon.msvc_stock.domain.exceptions.DuplicateNameException;
 import com.emazon.msvc_stock.domain.model.Brand;
 import com.emazon.msvc_stock.domain.spi.IBrandPersistencePort;
 import com.emazon.msvc_stock.domain.util.Constants;

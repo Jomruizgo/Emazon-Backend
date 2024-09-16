@@ -1,6 +1,7 @@
 package com.emazon.msvc_stock.configuration.exceptionhandler;
 
-import com.emazon.msvc_stock.domain.exception.DuplicateNameException;
+import com.emazon.msvc_stock.domain.exceptions.DuplicateNameException;
+import com.emazon.msvc_stock.domain.exceptions.InvalidTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -21,6 +22,15 @@ public class ControllerAdvisor {
                 HttpStatus.CONFLICT.toString(), LocalDateTime.now()
         ));
     }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidTokenException(InvalidTokenException exception){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionResponse(
+                String.format(exception.getMessage()),
+                HttpStatus.UNAUTHORIZED.toString(), LocalDateTime.now()
+        ));
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
