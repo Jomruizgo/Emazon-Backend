@@ -3,7 +3,7 @@ package com.emazon.msvc_stock.domain.api.usecase;
 import com.emazon.msvc_stock.domain.exception.DuplicateNameException;
 import com.emazon.msvc_stock.domain.model.Brand;
 import com.emazon.msvc_stock.domain.spi.IBrandPersistencePort;
-import com.emazon.msvc_stock.domain.util.DomainConstantsTrial;
+import com.emazon.msvc_stock.domain.util.TestConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -50,10 +50,10 @@ class BrandUseCaseTest {
 
     private static Stream<Arguments> provideInvalidBrands() {
         return Stream.of(
-                Arguments.of(new Brand(1L, null, "Various electronic items"), DomainConstantsTrial.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE),
-                Arguments.of(new Brand(1L, "", "Various electronic items"), DomainConstantsTrial.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE),
-                Arguments.of(new Brand(1L, "Electronics", null), DomainConstantsTrial.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE),
-                Arguments.of(new Brand(1L, "Electronics", ""), DomainConstantsTrial.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE)
+                Arguments.of(new Brand(1L, null, "Various electronic items"), TestConstants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE),
+                Arguments.of(new Brand(1L, "", "Various electronic items"), TestConstants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE),
+                Arguments.of(new Brand(1L, "Electronics", null), TestConstants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE),
+                Arguments.of(new Brand(1L, "Electronics", ""), TestConstants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE)
         );
     }
 
@@ -62,7 +62,7 @@ class BrandUseCaseTest {
     void testSaveBrandWhenNameIsTooLong() {
         // Test para validar que se lanza una excepción cuando el nombre de la categoría excede el límite máximo de longitud.
 
-        String longName = "A".repeat(DomainConstantsTrial.MAX_BRAND_NAME_LENGTH + 1);
+        String longName = "A".repeat(TestConstants.MAX_BRAND_NAME_LENGTH + 1);
         // Se crea un nombre que excede la longitud máxima permitida usando el método `repeat`.
 
         Brand brand = new Brand(1L, longName, "Various electronic items");
@@ -73,7 +73,7 @@ class BrandUseCaseTest {
         });
         // Se verifica que se lanza IllegalArgumentException cuando el nombre es demasiado largo.
 
-        assertEquals(DomainConstantsTrial.FIELD_NAME_TOO_LARGE_MESSAGE + DomainConstantsTrial.MAX_BRAND_NAME_LENGTH, exception.getMessage());
+        assertEquals(TestConstants.FIELD_NAME_TOO_LARGE_MESSAGE + TestConstants.MAX_BRAND_NAME_LENGTH, exception.getMessage());
         // Se comprueba que el mensaje de la excepción es el correcto.
     }
 
@@ -81,7 +81,7 @@ class BrandUseCaseTest {
     void testSaveBrandWhenDescriptionIsTooLong() {
         // Test para validar que se lanza una excepción cuando la descripción de la categoría excede la longitud máxima.
 
-        String longDescription = "A".repeat(DomainConstantsTrial.MAX_BRAND_DESCRIPTION_LENGTH + 1);
+        String longDescription = "A".repeat(TestConstants.MAX_BRAND_DESCRIPTION_LENGTH + 1);
         // Se crea una descripción que excede la longitud máxima permitida.
 
         Brand brand = new Brand(1L, "Electronics", longDescription);
@@ -92,7 +92,7 @@ class BrandUseCaseTest {
         });
         // Se verifica que se lanza IllegalArgumentException cuando la descripción es demasiado larga.
 
-        assertEquals(DomainConstantsTrial.FIELD_DESCRIPTION_TOO_LARGE_MESSAGE + DomainConstantsTrial.MAX_BRAND_DESCRIPTION_LENGTH, exception.getMessage());
+        assertEquals(TestConstants.FIELD_DESCRIPTION_TOO_LARGE_MESSAGE + TestConstants.MAX_BRAND_DESCRIPTION_LENGTH, exception.getMessage());
         // Se comprueba que el mensaje de la excepción es el esperado.
     }
 
@@ -117,7 +117,7 @@ class BrandUseCaseTest {
     void testSaveBrandWithNameAtMaxLength() {
         // Test para validar que una categoría con un nombre de longitud máxima permitida se guarda correctamente.
 
-        String nameAtMaxLength = "A".repeat(DomainConstantsTrial.MAX_BRAND_NAME_LENGTH);
+        String nameAtMaxLength = "A".repeat(TestConstants.MAX_BRAND_NAME_LENGTH);
         // Se crea un nombre con la longitud máxima permitida.
 
         Brand brand = new Brand(1L, nameAtMaxLength, "Various electronic items");
@@ -162,7 +162,7 @@ class BrandUseCaseTest {
         });
         // Se verifica que se lanza una excepción `DuplicateNameException` cuando el nombre de la categoría ya existe.
 
-        assertEquals(DomainConstantsTrial.DUPLICATED_BRAND_NAME_MESSAGE, exception.getMessage());
+        assertEquals(TestConstants.DUPLICATED_BRAND_NAME_MESSAGE, exception.getMessage());
         // Se comprueba que el mensaje de la excepción es el correcto.
 
         verify(brandPersistencePort, never()).saveBrand(any(Brand.class));

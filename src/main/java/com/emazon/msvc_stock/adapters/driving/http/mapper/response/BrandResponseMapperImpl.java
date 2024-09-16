@@ -25,5 +25,6 @@ public class BrandResponseMapperImpl implements IBrandResponseMapper{
         return brands.stream()
                 .map(this::toBrandResponse)
                 .toList();
+        //TODO Add sorting metadata
     }
 }

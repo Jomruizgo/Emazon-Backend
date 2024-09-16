@@ -2,8 +2,8 @@ package com.emazon.msvc_stock.domain.util;
 
 import java.util.Map;
 
-public final class DomainConstants {
-    private DomainConstants() {
+public final class TestConstants {
+    private TestConstants() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -22,11 +22,10 @@ public final class DomainConstants {
 
     public static final String DEFAULT_ARTICLE_SORT_BY = "name";
     public static final String DEFAULT_ARTICLE_SORTING_ORDER = "asc";
-    public static final String ARTICLE_SORT_BY_CATEGORY_NAME = "c.name";
     public static final Map<String, String> SORT_ARTICLE_FIELDS = Map.of(
             "name", "name",
             "brand", "brand.name",
-            "category", ARTICLE_SORT_BY_CATEGORY_NAME
+            "category", "c.name"
     );
 
     public static final String INVALID_SORT_ARTICLE_FIELD_MESSAGE = "Invalid sorting criteria: ";

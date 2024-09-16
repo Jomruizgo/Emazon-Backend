@@ -4,7 +4,7 @@ import com.emazon.msvc_stock.adapters.driven.jpa.mysql.mapper.IArticleEntityMapp
 import com.emazon.msvc_stock.adapters.driven.jpa.mysql.repository.IArticleRepository;
 import com.emazon.msvc_stock.domain.model.Article;
 import com.emazon.msvc_stock.domain.spi.IArticlePersistencePort;
-import com.emazon.msvc_stock.domain.util.DomainConstants;
+import com.emazon.msvc_stock.domain.util.Constants;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.JpaSort;
@@ -27,10 +27,9 @@ public class ArticleAdapter implements IArticlePersistencePort {
 
     @Override
     public List<Article> findArticlesSortedByField(String sortBy, boolean ascending, int page, int size) {
-
         Sort sort;
 
-        if (DomainConstants.ARTICLE_SORT_BY_CATEGORY_NAME.equals(sortBy)) {
+        if (Constants.ARTICLE_SORT_BY_CATEGORY_NAME.equals(sortBy)) {
             sort = JpaSort.unsafe(ascending ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy);
         } else {
             sort = Sort.by(ascending ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy);

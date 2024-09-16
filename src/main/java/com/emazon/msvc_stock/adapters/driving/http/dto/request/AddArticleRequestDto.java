@@ -3,7 +3,7 @@ package com.emazon.msvc_stock.adapters.driving.http.dto.request;
 
 import com.emazon.msvc_stock.domain.model.Brand;
 import com.emazon.msvc_stock.domain.model.Category;
-import com.emazon.msvc_stock.domain.util.DomainConstants;
+import com.emazon.msvc_stock.domain.util.Constants;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -16,10 +16,10 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 public class AddArticleRequestDto {
-    @NotBlank(message = DomainConstants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE)
+    @NotBlank(message = Constants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE)
     private String name;
 
-    @NotBlank(message = DomainConstants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE)
+    @NotBlank(message = Constants.FIELD_NAME_OR_DESCRIPTION_EMPTY_MESSAGE)
     private String description;
 
     @NotNull(message = "Quantity is mandatory")

@@ -9,7 +9,7 @@ import com.emazon.msvc_stock.domain.model.Category;
 import com.emazon.msvc_stock.domain.spi.IArticlePersistencePort;
 import com.emazon.msvc_stock.domain.spi.IBrandPersistencePort;
 import com.emazon.msvc_stock.domain.spi.ICategoryPersistencePort;
-import com.emazon.msvc_stock.domain.util.DomainConstantsTrial;
+import com.emazon.msvc_stock.domain.util.TestConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +55,7 @@ class ArticleUseCaseTest {
         article.setCategories(categories);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> articleUseCase.saveArticle(article));
-        assertEquals(DomainConstantsTrial.CATEGORY_ID_OR_NAME_MANDATORY_MESSAGE, exception.getMessage());
+        assertEquals(TestConstants.CATEGORY_ID_OR_NAME_MANDATORY_MESSAGE, exception.getMessage());
     }
 
     @Test
@@ -76,7 +76,7 @@ class ArticleUseCaseTest {
 
         // Ejecutar el test y verificar que se lanza la excepción correcta
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> articleUseCase.saveArticle(article));
-        assertEquals(DomainConstantsTrial.INVALID_BRAND_MESSAGE, exception.getMessage());
+        assertEquals(TestConstants.INVALID_BRAND_MESSAGE, exception.getMessage());
     }
 
     @Test
@@ -96,7 +96,7 @@ class ArticleUseCaseTest {
                 assertThrows(IllegalArgumentException.class,
                         () -> articleUseCase.listArticles("invalidField", "asc", 0, 10));
 
-        assertEquals(DomainConstantsTrial.INVALID_SORT_ARTICLE_FIELD_MESSAGE + "invalidField", exception.getMessage());
+        assertEquals(TestConstants.INVALID_SORT_ARTICLE_FIELD_MESSAGE + "invalidField", exception.getMessage());
     }
 
     private Set<Category> getMockCategories() {

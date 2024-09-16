@@ -2,10 +2,15 @@ package com.emazon.msvc_stock.domain.util;
 
 import java.util.Map;
 
-public final class DomainConstantsTrial {
-    private DomainConstantsTrial() {
+public final class Constants {
+    private Constants() {
         throw new IllegalStateException("Utility class");
     }
+
+    //Controllers Path
+    public static final String API_ARTICLE_PATH = "api/article";
+    public static final String API_CATEGORY_PATH = "api/category";
+    public static final String API_BRAND_PATH = "api/brand";
 
 
     public static final int MAX_CATEGORY_NAME_LENGTH=50;
@@ -22,10 +27,11 @@ public final class DomainConstantsTrial {
 
     public static final String DEFAULT_ARTICLE_SORT_BY = "name";
     public static final String DEFAULT_ARTICLE_SORTING_ORDER = "asc";
+    public static final String ARTICLE_SORT_BY_CATEGORY_NAME = "c.name";
     public static final Map<String, String> SORT_ARTICLE_FIELDS = Map.of(
             "name", "name",
             "brand", "brand.name",
-            "category", "c.name"
+            "category", ARTICLE_SORT_BY_CATEGORY_NAME
     );
 
     public static final String INVALID_SORT_ARTICLE_FIELD_MESSAGE = "Invalid sorting criteria: ";

@@ -26,5 +26,6 @@ public class CategoryResponseMapperImpl implements ICategoryResponseMapper {
         return categories.stream()
                 .map(this::toCategoryResponse)  // es equivalente a .map(category -> toCategoryResponse(category))
                 .toList();
+        //TODO Add sorting metadata
     }
 }

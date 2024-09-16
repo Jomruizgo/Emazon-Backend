@@ -38,5 +38,6 @@ public class ArticleResponseMapperImpl implements IArticleResponseMapper{
 
         return articles.stream().
                 map(this::toArticleResponseDto).toList();
+        //TODO Add sorting metadata
     }
 }

@@ -5,6 +5,7 @@ import com.emazon.msvc_stock.adapters.driving.http.dto.response.ArticleResponseD
 import com.emazon.msvc_stock.adapters.driving.http.mapper.request.IArticleRequestMapper;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.response.IArticleResponseMapper;
 import com.emazon.msvc_stock.domain.api.IArticleServicePort;
+import com.emazon.msvc_stock.domain.util.Constants;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/article")
+@RequestMapping(Constants.API_ARTICLE_PATH)
 public class ArticleRestControllerAdapter {
     private final IArticleServicePort articleServicePort;
     private final IArticleRequestMapper articleRequestMapper;

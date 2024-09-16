@@ -5,6 +5,7 @@ import com.emazon.msvc_stock.adapters.driving.http.dto.response.CategoryResponse
 import com.emazon.msvc_stock.adapters.driving.http.mapper.request.ICategoryRequestMapper;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.response.ICategoryResponseMapper;
 import com.emazon.msvc_stock.domain.api.ICategoryServicePort;
+import com.emazon.msvc_stock.domain.util.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/category")
+@RequestMapping(Constants.API_CATEGORY_PATH)
 public class CategoryRestControllerAdapter {
     private final ICategoryServicePort categoryServicePort;
     private final ICategoryRequestMapper categoryRequestMapper;

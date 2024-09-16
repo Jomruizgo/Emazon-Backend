@@ -7,7 +7,7 @@ import com.emazon.msvc_stock.domain.model.Category;
 import com.emazon.msvc_stock.domain.spi.IArticlePersistencePort;
 import com.emazon.msvc_stock.domain.spi.IBrandPersistencePort;
 import com.emazon.msvc_stock.domain.spi.ICategoryPersistencePort;
-import com.emazon.msvc_stock.domain.util.DomainConstants;
+import com.emazon.msvc_stock.domain.util.Constants;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,8 +45,8 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     private void validateCategories(Set<Category> categories) {
-        if (categories.isEmpty() || categories.size() > DomainConstants.MAX_CATEGORY_ASSOCIATED_TO_ARTICLE) {
-            throw new IllegalArgumentException(DomainConstants.LIMIT_CATEGORIES_TO_ARTICLE_MESSAGE);
+        if (categories.isEmpty() || categories.size() > Constants.MAX_CATEGORY_ASSOCIATED_TO_ARTICLE) {
+            throw new IllegalArgumentException(Constants.LIMIT_CATEGORIES_TO_ARTICLE_MESSAGE);
         }
     }
 
@@ -66,14 +66,14 @@ public class ArticleUseCase implements IArticleServicePort {
         } else if (category.getName() != null) {
             return findCategoryByName(category.getName());
         } else {
-            throw new IllegalArgumentException(DomainConstants.CATEGORY_ID_OR_NAME_MANDATORY_MESSAGE);
+            throw new IllegalArgumentException(Constants.CATEGORY_ID_OR_NAME_MANDATORY_MESSAGE);
         }
     }
 
     private Category findCategoryById(Long id) {
         Category existingCategory = categoryPersistencePort.findCategoryById(id);
         if (existingCategory == null) {
-            throw new IllegalArgumentException(DomainConstants.CATEGORY_ID_DOES_NOT_EXIST_MESSAGE + id);
+            throw new IllegalArgumentException(Constants.CATEGORY_ID_DOES_NOT_EXIST_MESSAGE + id);
         }
         return existingCategory;
     }
@@ -81,19 +81,19 @@ public class ArticleUseCase implements IArticleServicePort {
     private Category findCategoryByName(String name) {
         Category existingCategory = categoryPersistencePort.findCategoryByName(name);
         if (existingCategory == null) {
-            throw new IllegalArgumentException(DomainConstants.CATEGORY_NAME_DOES_NOT_EXIST_MESSAGE + name);
+            throw new IllegalArgumentException(Constants.CATEGORY_NAME_DOES_NOT_EXIST_MESSAGE + name);
         }
         return existingCategory;
     }
 
     private Brand getValidBrand(Brand brand) {
         if (brand.getId() == null) {
-            throw new IllegalArgumentException(DomainConstants.INVALID_BRAND_MESSAGE);
+            throw new IllegalArgumentException(Constants.INVALID_BRAND_MESSAGE);
         }
 
         Brand existingBrand = brandPersistencePort.findBrandById(brand.getId());
         if (existingBrand == null) {
-            throw new IllegalArgumentException(DomainConstants.INVALID_BRAND_MESSAGE);
+            throw new IllegalArgumentException(Constants.INVALID_BRAND_MESSAGE);
         }
 
         return existingBrand;
@@ -101,19 +101,19 @@ public class ArticleUseCase implements IArticleServicePort {
 
     private String getValidSortByField(String sortBy) {
         if (sortBy == null || sortBy.isEmpty()) {
-            return DomainConstants.DEFAULT_ARTICLE_SORT_BY;
+            return Constants.DEFAULT_ARTICLE_SORT_BY;
         }
-        String validSortBy = DomainConstants.SORT_ARTICLE_FIELDS.get(sortBy.toLowerCase());
+        String validSortBy = Constants.SORT_ARTICLE_FIELDS.get(sortBy.toLowerCase());
         if (validSortBy == null) {
-            throw new IllegalArgumentException(DomainConstants.INVALID_SORT_ARTICLE_FIELD_MESSAGE + sortBy);
+            throw new IllegalArgumentException(Constants.INVALID_SORT_ARTICLE_FIELD_MESSAGE + sortBy);
         }
         return validSortBy;
     }
 
     private boolean isAscendingOrder(String order) {
         if (order == null || order.isEmpty()) {
-            return DomainConstants.DEFAULT_ARTICLE_SORTING_ORDER.equalsIgnoreCase(DomainConstants.DEFAULT_ARTICLE_SORTING_ORDER);
+            return Constants.DEFAULT_ARTICLE_SORTING_ORDER.equalsIgnoreCase(Constants.DEFAULT_ARTICLE_SORTING_ORDER);
         }
-        return DomainConstants.DEFAULT_ARTICLE_SORTING_ORDER.equalsIgnoreCase(order);
+        return Constants.DEFAULT_ARTICLE_SORTING_ORDER.equalsIgnoreCase(order);
     }
 }
