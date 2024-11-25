@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface IArticleServicePort {
     void saveArticle(Article article);
+
     List<Article> listArticles(String sortBy,String order, int page, int size);
+
+    boolean increaseArticleStocks(Long articleId, int quantity);
 }

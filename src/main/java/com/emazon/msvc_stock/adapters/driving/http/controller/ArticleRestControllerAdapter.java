@@ -1,6 +1,7 @@
 package com.emazon.msvc_stock.adapters.driving.http.controller;
 
 import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddArticleRequestDto;
+import com.emazon.msvc_stock.adapters.driving.http.dto.request.AddStockRequestDto;
 import com.emazon.msvc_stock.adapters.driving.http.dto.response.ArticleResponseDto;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.request.IArticleRequestMapper;
 import com.emazon.msvc_stock.adapters.driving.http.mapper.response.IArticleResponseMapper;
@@ -37,5 +38,16 @@ public class ArticleRestControllerAdapter {
                                                                    @RequestParam(required = false) String sortBy ,
                                                                    @RequestParam(required = false) String order){
         return ResponseEntity.ok(articleResponseMapper.toArticleResponseList(articleServicePort.listArticles(sortBy, order, page, size)));
+    }
+
+
+    @PostMapping("/supply")
+    public ResponseEntity<Boolean> increaseArticleStock(@RequestBody AddStockRequestDto stockRequest) {
+        try {
+            boolean success = articleServicePort.increaseArticleStocks(stockRequest.getArticleId(), stockRequest.getQuantity());
+            return new ResponseEntity<>(success, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
     }
 }

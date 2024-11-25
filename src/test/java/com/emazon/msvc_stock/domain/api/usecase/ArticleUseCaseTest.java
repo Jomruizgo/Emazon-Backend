@@ -48,6 +48,57 @@ class ArticleUseCaseTest {
     }
 
     @Test
+    void increaseArticleStocks_shouldReturnFalse_whenQuantityIsLessThanOrEqualToZero() {
+        boolean result = articleUseCase.increaseArticleStocks(1L, 0);
+        assertFalse(result);
+
+        result = articleUseCase.increaseArticleStocks(1L, -5);
+        assertFalse(result);
+
+        verifyNoInteractions(articlePersistencePort);
+    }
+
+    @Test
+    void increaseArticleStocks_shouldReturnFalse_whenArticleNotFound() {
+        when(articlePersistencePort.findArticleByArticleId(1L)).thenReturn(null);
+
+        boolean result = articleUseCase.increaseArticleStocks(1L, 10);
+        assertFalse(result);
+
+        verify(articlePersistencePort).findArticleByArticleId(1L);
+        verifyNoMoreInteractions(articlePersistencePort);
+    }
+
+    @Test
+    void increaseArticleStocks_shouldReturnTrue_whenArticleFoundAndQuantityIsPositive() {
+        Article mockArticle = mock(Article.class);
+        when(articlePersistencePort.findArticleByArticleId(1L)).thenReturn(mockArticle);
+        when(mockArticle.getQuantity()).thenReturn(5);
+
+        boolean result = articleUseCase.increaseArticleStocks(1L, 10);
+
+        assertTrue(result);
+        verify(articlePersistencePort).findArticleByArticleId(1L);
+        verify(mockArticle).setQuantity(15); // 5 + 10
+        verify(articlePersistencePort).saveArticle(mockArticle);
+    }
+
+    @Test
+    void increaseArticleStocks_shouldReturnFalse_whenExceptionOccurs() {
+        Article mockArticle = mock(Article.class);
+        when(articlePersistencePort.findArticleByArticleId(1L)).thenReturn(mockArticle);
+        when(mockArticle.getQuantity()).thenReturn(5);
+        doThrow(new RuntimeException()).when(articlePersistencePort).saveArticle(mockArticle);
+
+        boolean result = articleUseCase.increaseArticleStocks(1L, 10);
+
+        assertFalse(result);
+        verify(articlePersistencePort).findArticleByArticleId(1L);
+        verify(mockArticle).setQuantity(15); // 5 + 10
+        verify(articlePersistencePort).saveArticle(mockArticle);
+    }
+
+    @Test
     void testSaveArticleWithInvalidCategory() {
         Article article = new Article();
         Set<Category> categories = new HashSet<>();
@@ -89,6 +140,19 @@ class ArticleUseCaseTest {
         assertNotNull(articles);
         assertEquals(2, articles.size());
     }
+
+    @Test
+    void findCategoryByName_shouldReturnCategory_whenCategoryExists() {
+        Category mockCategory = new Category();
+        when(categoryPersistencePort.findCategoryByName("Electronics")).thenReturn(mockCategory);
+
+        Category result = categoryPersistencePort.findCategoryByName("Electronics");
+
+        assertNotNull(result);
+        assertEquals(mockCategory, result);
+        verify(categoryPersistencePort).findCategoryByName("Electronics");
+    }
+
 
     @Test
     void testListArticlesWithInvalidSortField() {

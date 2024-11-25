@@ -1,6 +1,7 @@
 package com.emazon.msvc_stock.domain.api.usecase;
 
 import com.emazon.msvc_stock.domain.api.IArticleServicePort;
+import com.emazon.msvc_stock.domain.exceptions.ObjectNotFoundException;
 import com.emazon.msvc_stock.domain.model.Article;
 import com.emazon.msvc_stock.domain.model.Brand;
 import com.emazon.msvc_stock.domain.model.Category;
@@ -42,6 +43,28 @@ public class ArticleUseCase implements IArticleServicePort {
         boolean ascending = isAscendingOrder(order);
 
         return articlePersistencePort.findArticlesSortedByField(validSortBy, ascending, page, size);
+    }
+
+    @Override
+    public boolean increaseArticleStocks(Long articleId, int quantity) {
+        if(quantity <= 0) {
+            return false;
+        }
+
+        Article article = articlePersistencePort.findArticleByArticleId(articleId);
+
+        if (article == null) {
+            return false;
+        }
+
+        try {
+            article.setQuantity( article.getQuantity() + quantity);
+            articlePersistencePort.saveArticle(article);
+            return true;
+
+        }catch (Exception e) {
+            return false;
+        }
     }
 
     private void validateCategories(Set<Category> categories) {
@@ -112,7 +135,7 @@ public class ArticleUseCase implements IArticleServicePort {
 
     private boolean isAscendingOrder(String order) {
         if (order == null || order.isEmpty()) {
-            return Constants.DEFAULT_ARTICLE_SORTING_ORDER.equalsIgnoreCase(Constants.DEFAULT_ARTICLE_SORTING_ORDER);
+            return true;
         }
         return Constants.DEFAULT_ARTICLE_SORTING_ORDER.equalsIgnoreCase(order);
     }

@@ -1,6 +1,7 @@
 package com.emazon.msvc_stock.domain.spi;
 
 import com.emazon.msvc_stock.domain.model.Category;
+import com.emazon.msvc_stock.domain.model.PaginationModel;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface ICategoryPersistencePort {
     Category findCategoryByName(String name);
     Category findCategoryById(Long id);
 
-    List<Category> findAllOrderedByName(boolean ascending, int page, int size);
+    PaginationModel findAllOrderedByName(boolean ascending, int page, int size);
 }

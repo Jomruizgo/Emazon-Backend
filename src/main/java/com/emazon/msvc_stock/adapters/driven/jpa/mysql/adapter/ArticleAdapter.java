@@ -39,4 +39,10 @@ public class ArticleAdapter implements IArticlePersistencePort {
 
         return articleEntityMapper.toModelList(articleRepository.findAllSorted(pageRequest).getContent());
     }
+
+    @Override
+    public Article findArticleByArticleId(Long articleId) {
+
+        return articleEntityMapper.toModel(articleRepository.findById(articleId).orElse(null));
+    }
 }

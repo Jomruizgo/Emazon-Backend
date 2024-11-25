@@ -8,4 +8,6 @@ public interface IArticlePersistencePort {
     void saveArticle(Article article);
 
     List<Article> findArticlesSortedByField(String sortBy, boolean ascending, int page, int size);
+
+    Article findArticleByArticleId(Long articleId);
 }

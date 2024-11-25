@@ -28,4 +28,13 @@ public class CategoryResponseMapperImpl implements ICategoryResponseMapper {
                 .toList();
         //TODO Add sorting metadata
     }
+
+    @Override
+    public CategoryResponseDto toResponse(Category category) {
+        CategoryResponseDto dto = new CategoryResponseDto();
+        dto.setId(category.getId());
+        dto.setName(category.getName());
+        dto.setDescription(category.getDescription());
+        return dto;
+    }
 }

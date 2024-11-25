@@ -30,7 +30,7 @@ public class ArticleEntity {
     @Column(name= "price", nullable = false)
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "article",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ArticleCategoryEntity> articleCategories = new HashSet<>();
     //Using Set in order to avoid duplicates categories associated with an article
 

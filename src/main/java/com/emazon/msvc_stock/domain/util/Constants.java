@@ -11,9 +11,8 @@ public final class Constants {
     public static final String API_ARTICLE_PATH = "api/article";
     public static final String API_CATEGORY_PATH = "api/category";
     public static final String API_BRAND_PATH = "api/brand";
+    public static final String ARTICLE_SUPPY_SEMIPATH = "/supply";
 
-
-    public static final String ADMIN_ROLE = "ADMINISTRATOR";
 
     public static final int MAX_CATEGORY_NAME_LENGTH=50;
     public static final int MAX_CATEGORY_DESCRIPTION_LENGTH=90;
@@ -43,6 +42,7 @@ public final class Constants {
     public static final String FIELD_NAME_TOO_LARGE_MESSAGE = "Field 'name' cannot be longer than ";
     public static final String FIELD_DESCRIPTION_TOO_LARGE_MESSAGE = "Field 'name' cannot be longer than ";
     public static final String DUPLICATED_CATEGORY_NAME_MESSAGE = "Category name already exists";
+    public static final String INVALID_QUANTITY_MESSAGE = "Invalid quantity";
 
     public static final String DUPLICATED_BRAND_NAME_MESSAGE = "Brand name already exists";
     public static final String INVALID_BRAND_MESSAGE = "Invalid brand";
@@ -51,4 +51,5 @@ public final class Constants {
     public static final String CATEGORY_NAME_DOES_NOT_EXIST_MESSAGE = "Category with follow name does not exist: ";
     public static final String CATEGORY_ID_DOES_NOT_EXIST_MESSAGE = "Category with follow id does not exist: ";
     public static final String CATEGORY_ID_OR_NAME_MANDATORY_MESSAGE="Category must have either an ID or a name";
+
 }

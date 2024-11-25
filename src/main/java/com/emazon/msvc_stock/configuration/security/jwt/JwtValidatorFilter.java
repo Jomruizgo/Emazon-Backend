@@ -44,7 +44,7 @@ public class JwtValidatorFilter extends OncePerRequestFilter {
 
             String username = tokenPort.extractUsername(jwtToken);
             String stringAuthorities = tokenPort.extractSpecificClaim(jwtToken,"authorities");
-            System.out.println(stringAuthorities);
+
             Collection<? extends GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(stringAuthorities);
 
             SecurityContext context = SecurityContextHolder.createEmptyContext();

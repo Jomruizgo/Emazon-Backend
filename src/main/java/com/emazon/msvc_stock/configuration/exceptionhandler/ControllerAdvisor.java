@@ -2,6 +2,7 @@ package com.emazon.msvc_stock.configuration.exceptionhandler;
 
 import com.emazon.msvc_stock.domain.exceptions.DuplicateNameException;
 import com.emazon.msvc_stock.domain.exceptions.InvalidTokenException;
+import com.emazon.msvc_stock.domain.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -31,6 +32,13 @@ public class ControllerAdvisor {
         ));
     }
 
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleObjectNotFoundException(ObjectNotFoundException exception){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ExceptionResponse(
+                String.format(exception.getMessage()),
+                HttpStatus.CONFLICT.toString(), LocalDateTime.now()
+        ));
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {

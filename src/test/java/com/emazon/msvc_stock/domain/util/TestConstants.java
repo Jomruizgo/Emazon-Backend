@@ -8,6 +8,13 @@ public final class TestConstants {
     }
 
 
+    //Controllers Path
+    public static final String API_ARTICLE_PATH = "api/article";
+    public static final String API_CATEGORY_PATH = "api/category";
+    public static final String API_BRAND_PATH = "api/brand";
+    public static final String ARTICLE_SUPPY_SEMIPATH = "/supply";
+
+
     public static final int MAX_CATEGORY_NAME_LENGTH=50;
     public static final int MAX_CATEGORY_DESCRIPTION_LENGTH=90;
     public static final String DEFAULT_CATEGORY_NAME_ORDER="asc";
@@ -22,10 +29,11 @@ public final class TestConstants {
 
     public static final String DEFAULT_ARTICLE_SORT_BY = "name";
     public static final String DEFAULT_ARTICLE_SORTING_ORDER = "asc";
+    public static final String ARTICLE_SORT_BY_CATEGORY_NAME = "c.name";
     public static final Map<String, String> SORT_ARTICLE_FIELDS = Map.of(
             "name", "name",
             "brand", "brand.name",
-            "category", "c.name"
+            "category", ARTICLE_SORT_BY_CATEGORY_NAME
     );
 
     public static final String INVALID_SORT_ARTICLE_FIELD_MESSAGE = "Invalid sorting criteria: ";
@@ -35,6 +43,7 @@ public final class TestConstants {
     public static final String FIELD_NAME_TOO_LARGE_MESSAGE = "Field 'name' cannot be longer than ";
     public static final String FIELD_DESCRIPTION_TOO_LARGE_MESSAGE = "Field 'name' cannot be longer than ";
     public static final String DUPLICATED_CATEGORY_NAME_MESSAGE = "Category name already exists";
+    public static final String INVALID_QUANTITY_MESSAGE = "Invalid quantity";
 
     public static final String DUPLICATED_BRAND_NAME_MESSAGE = "Brand name already exists";
     public static final String INVALID_BRAND_MESSAGE = "Invalid brand";

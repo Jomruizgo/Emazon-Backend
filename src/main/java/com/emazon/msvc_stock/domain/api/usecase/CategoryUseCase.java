@@ -3,6 +3,7 @@ package com.emazon.msvc_stock.domain.api.usecase;
 import com.emazon.msvc_stock.domain.api.ICategoryServicePort;
 import com.emazon.msvc_stock.domain.exceptions.DuplicateNameException;
 import com.emazon.msvc_stock.domain.model.Category;
+import com.emazon.msvc_stock.domain.model.PaginationModel;
 import com.emazon.msvc_stock.domain.spi.ICategoryPersistencePort;
 import com.emazon.msvc_stock.domain.util.Constants;
 
@@ -32,7 +33,7 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public List<Category> listCategories(String order, int page, int size) {
+    public PaginationModel listCategories(String order, int page, int size) {
         // Si el parámetro 'orden' es nulo o vacío, asignar un valor por defecto (ascendente)
         if (order == null || order.isBlank()) {
             order = Constants.DEFAULT_CATEGORY_NAME_ORDER;  // Valor por defecto

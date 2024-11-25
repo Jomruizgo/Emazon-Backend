@@ -8,5 +8,7 @@ import java.util.List;
 public interface ICategoryResponseMapper {
     CategoryResponseDto toCategoryResponse(Category category);
     List<CategoryResponseDto> toCategoryResponseList(List<Category> categories);
+
+    CategoryResponseDto toResponse(Category category);
 }
 
